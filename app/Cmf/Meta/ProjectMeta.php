@@ -50,6 +50,22 @@ class ProjectMeta extends Meta
     }
 
     /**
+     * @return string
+     */
+    public static function getSingular(): string
+    {
+        return 'Brijtjes-project';
+    }
+
+    /**
+     * @return string
+     */
+    public static function getPlural(): string
+    {
+        return 'Brijtjes-projecten';
+    }
+
+    /**
      * @return Sorter
      */
     public static function sorter(): Sorter
@@ -77,7 +93,7 @@ class ProjectMeta extends Meta
     public static function sidebar(): array
     {
         return [
-            FileSelectField::make('photo'),
+            FileSelectField::make('photo')->label('foto'),
         ];
     }
 
@@ -88,15 +104,16 @@ class ProjectMeta extends Meta
     {
         return [
             Tabs::make()
-                ->tab('General', [
-                    TextToSlugField::make('title', 'slug')->validate(['required',]),
-                    TextField::make('description')->multiline()->validate(['required',]),
+                ->tab('Algemeen', [
+                    TextToSlugField::make('title', 'slug')->validate(['required',])->label('Titel'),
+                    TextField::make('description')->multiline()->validate(['required',])->label('Beschrijving'),
                 ])
                 ->tab('Brijtjes', [
                     ContentBlocks::make('rows', 'type', 'order')
-                        ->block('Row', 'row', [
+                        ->block('Brijtje', 'row', [
                             TextField::make('text')->multiline(),
-                        ]),
+                        ])
+                        ->label('Brijtjes'),
                 ]),
         ];
     }

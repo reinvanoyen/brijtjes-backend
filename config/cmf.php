@@ -34,7 +34,7 @@ return [
     | The locale of the admin panel.
     |
     */
-    'locale' => 'en',
+    'locale' => 'nl',
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'theme' => [
-        'image' => '/login.jpeg',
+        'image' => '/login.webp',
         'primary_color' => '#CA7B59',
         'primary_color_spin' => -90,
         'primary_color_strength' => 50,
@@ -100,7 +100,7 @@ return [
     */
     'media_library_file_labels' => [
         'photo' => [
-            'name' => 'Photo',
+            'name' => 'Foto',
             'color' => '#4458b3',
         ],
         'document' => [

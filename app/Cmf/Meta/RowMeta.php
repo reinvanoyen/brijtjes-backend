@@ -16,7 +16,7 @@ class RowMeta extends Meta
     /**
      * @var string $title
      */
-    protected static $title = 'id';
+    protected static $title = 'text';
 
     /**
      * @var int $perPage
@@ -31,12 +31,28 @@ class RowMeta extends Meta
     ];
 
     /**
+     * @return string
+     */
+    public static function getSingular(): string
+    {
+        return 'Brijtje';
+    }
+
+    /**
+     * @return string
+     */
+    public static function getPlural(): string
+    {
+        return 'Brijtjes';
+    }
+
+    /**
      * @return array
      */
     public static function index(): array
     {
         return [
-            TextView::make('id'),
+            TextView::make('text'),
         ];
     }
 

@@ -20,7 +20,15 @@ class ProjectModule extends Module
      */
     protected function title(): string
     {
-        return 'Projects';
+        return 'Projecten';
+    }
+
+    /**
+     * @return string
+     */
+    protected function icon()
+    {
+        return 'gesture';
     }
 
     /**
@@ -31,7 +39,7 @@ class ProjectModule extends Module
         return Index::make(ProjectMeta::class)
             ->prepend(ManualOrderControls::make(),)
             ->header([
-                Link::make('New project', 'create')
+                Link::make('Nieuw project', 'create')
                     ->style('primary'),
             ])
             ->actions([
