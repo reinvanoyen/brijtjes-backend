@@ -14,5 +14,8 @@ use \App\Http\Controllers\ProjectController;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::get('/api/projects/{slug}', [ProjectController::class, 'getBySlug']);
 Route::get('/api/projects', [ProjectController::class, 'index']);
