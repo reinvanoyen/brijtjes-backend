@@ -43,10 +43,10 @@ return [
     */
     'theme' => [
         'image' => '/login.webp',
-        'primary_color' => '#CA7B59',
-        'primary_color_spin' => -90,
+        'primary_color' => '#d6764d',
+        'primary_color_spin' => 100,
         'primary_color_strength' => 50,
-        'border_radius' => '5px',
+        'border_radius' => '10px',
     ],
 
     /*
