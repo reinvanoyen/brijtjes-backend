@@ -10,5 +10,4 @@ class Row extends Model
     use HasFactory;
 
     protected $table = 'rows';
-
 }

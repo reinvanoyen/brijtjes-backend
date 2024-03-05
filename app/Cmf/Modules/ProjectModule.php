@@ -4,14 +4,20 @@ namespace App\Cmf\Modules;
 
 use App\Cmf\Meta\ProjectMeta;
 use ReinVanOyen\Cmf\Action\Action;
+use ReinVanOyen\Cmf\Action\Delete;
 use ReinVanOyen\Cmf\Action\Index;
 use ReinVanOyen\Cmf\Action\Create;
 use ReinVanOyen\Cmf\Action\Edit;
+use ReinVanOyen\Cmf\Components\Icon;
+use ReinVanOyen\Cmf\Components\ManualOrderControls;
 use ReinVanOyen\Cmf\Module;
 use ReinVanOyen\Cmf\Components\Link;
 
 class ProjectModule extends Module
 {
+    /**
+     * @return string
+     */
     protected function title(): string
     {
         return 'Projects';
@@ -23,11 +29,23 @@ class ProjectModule extends Module
     public function index(): Action
     {
         return Index::make(ProjectMeta::class)
+            ->prepend(ManualOrderControls::make(),)
             ->header([
                 Link::make('New project', 'create')
                     ->style('primary'),
             ])
-            ->action('edit');
+            ->actions([
+                Icon::make('edit')->to('edit'),
+                Icon::make('delete')->to('delete'),
+            ]);
+    }
+
+    /**
+     * @return Action
+     */
+    public function delete(): Action
+    {
+        return Delete::make(ProjectMeta::class);
     }
 
     /**

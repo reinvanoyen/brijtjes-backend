@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/api/projects', function () {
-    return \App\Models\Project::all();
-});
-
-Route::get('/api/projects/{slug}', function ($slug) {
-    return \App\Models\Project::where('slug', $slug)->firstOrFail();
-});
+Route::get('/api/projects/{slug}', [ProjectController::class, 'getBySlug']);
+Route::get('/api/projects', [ProjectController::class, 'index']);

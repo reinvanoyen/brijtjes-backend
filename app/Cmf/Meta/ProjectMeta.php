@@ -4,6 +4,7 @@ namespace App\Cmf\Meta;
 
 use ReinVanOyen\Cmf\Components\ContentBlocks;
 use ReinVanOyen\Cmf\Components\FileSelectField;
+use ReinVanOyen\Cmf\Components\Stack;
 use ReinVanOyen\Cmf\Components\Tabs;
 use ReinVanOyen\Cmf\Components\TextField;
 use ReinVanOyen\Cmf\Components\TextToSlugField;
@@ -13,6 +14,8 @@ use ReinVanOyen\Cmf\Meta;
 use App\Models\Project;
 use ReinVanOyen\Cmf\Searchers\LikeSearcher;
 use ReinVanOyen\Cmf\Searchers\Searcher;
+use ReinVanOyen\Cmf\Sorters\ManualOrderSorter;
+use ReinVanOyen\Cmf\Sorters\Sorter;
 
 class ProjectMeta extends Meta
 {
@@ -31,8 +34,11 @@ class ProjectMeta extends Meta
      */
     protected static $perPage = 10;
 
+    /**
+     * @var int[] $indexGrid
+     */
     protected static $indexGrid = [
-        0, 1,
+        0, 0, 1,
     ];
 
     /**
@@ -44,16 +50,30 @@ class ProjectMeta extends Meta
     }
 
     /**
+     * @return Sorter
+     */
+    public static function sorter(): Sorter
+    {
+        return new ManualOrderSorter('order');
+    }
+
+    /**
      * @return array
      */
     public static function index(): array
     {
         return [
             Thumb::make('photo'),
-            TextView::make('title')->style('primary'),
+            Stack::make([
+                TextView::make('title')->style('primary'),
+                TextView::make('description'),
+            ])->vertical()->gapless(),
         ];
     }
 
+    /**
+     * @return array
+     */
     public static function sidebar(): array
     {
         return [
@@ -69,8 +89,8 @@ class ProjectMeta extends Meta
         return [
             Tabs::make()
                 ->tab('General', [
-                    TextToSlugField::make('title', 'slug'),
-                    TextField::make('description')->multiline(),
+                    TextToSlugField::make('title', 'slug')->validate(['required',]),
+                    TextField::make('description')->multiline()->validate(['required',]),
                 ])
                 ->tab('Brijtjes', [
                     ContentBlocks::make('rows', 'type', 'order')
