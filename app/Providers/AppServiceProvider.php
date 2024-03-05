@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Intervention\Image\Image;
+use ReinVanOyen\Cmf\Contracts\MediaConverter;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $converter = app(MediaConverter::class);
+
+        $converter->registerConversion('thumb', function (Image $image) {
+            $image->fit(560, 560);
+            $image->sharpen(3);
+        });
     }
 }
