@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Cmf\Modules\ImportModule;
 use App\Cmf\Modules\ProjectModule;
 use ReinVanOyen\Cmf\CmfApplicationServiceProvider;
 use ReinVanOyen\Cmf\Modules\UserModule;
@@ -13,6 +14,7 @@ class CmfServiceProvider extends CmfApplicationServiceProvider
     {
         return [
             ProjectModule::class,
+            ImportModule::class,
             UserModule::class,
             MediaLibraryModule::class,
         ];
